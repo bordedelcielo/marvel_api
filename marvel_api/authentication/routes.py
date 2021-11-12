@@ -10,16 +10,18 @@ def signup():
 
     try:
         if request.method == 'POST' and form.validate_on_submit():
+            first_name = form.first_name.data
+            last_name = form.last_name.data
             email = form.email.data
             password = form.password.data
             print(email,password)
 
-            user = User(email, password = password)
+            user = User(first_name, last_name, email, password = password)
 
             db.session.add(user)
             db.session.commit()
 
-            flash(f'You have successfully created a user account {email}', 'user-created')
+            flash(f'You have successfully created a user account {first_name} {last_name} {email}', 'user-created')
 
             return redirect(url_for('site.home'))
 
