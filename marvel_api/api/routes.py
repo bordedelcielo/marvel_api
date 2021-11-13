@@ -20,11 +20,11 @@ def create_hero(current_user_token):
     comics_appeared_in = request.json['comics_appeared_in']
     super_power = request.json['super_power']
     date_created = request.json['date_created']
-    owner = current_user_token.token
+    user_token = current_user_token.token
 
     print(f'BIG TESTER: {current_user_token.token}')
 
-    hero = Hero(name,description,comics_appeared_in,super_power,date_created, owner = owner)
+    hero = Hero(name,description,comics_appeared_in,super_power,date_created, user_token)
 
     db.session.add(hero)
     db.session.commit()
@@ -36,8 +36,8 @@ def create_hero(current_user_token):
 @api.route('/heroes', methods = ['GET'])
 @token_required
 def get_heroes(current_user_token):
-    owner_hash = current_user_token.token # maybe I should choose a different name than "owner".
-    heroes = Hero.query.filter_by(owner = owner_hash)
+    owner = current_user_token.token # maybe I should choose a different name than "owner".
+    heroes = Hero.query.filter_by(user_token = owner).all()
     response = heroes_schema.dump(heroes)
     return jsonify(response)
 
@@ -45,8 +45,8 @@ def get_heroes(current_user_token):
 @api.route('/heroes/<id>', methods = ['GET'])
 @token_required
 def get_drone(current_user_token, id):
-    owner_hash = current_user_token.token
-    if owner_hash == current_user_token.token:
+    owner = current_user_token.token
+    if owner == current_user_token.token:
         hero = Hero.query.get(id)
         response = hero_schema.dump(hero)
         return jsonify(response)
@@ -66,7 +66,7 @@ def update_hero(current_user_token,id):
     hero.comics_appeared_in = request.json['comics_appeared_in']
     hero.super_power = request.json['super_power']
     hero.date_created = request.json['date_created']
-    hero.owner = current_user_token.token
+    hero.user_token = current_user_token.token
 
     db.session.commit()
     response = hero_schema.dump(hero)

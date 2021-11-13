@@ -61,15 +61,15 @@ class Hero(db.Model):
     comics_appeared_in = db.Column(db.Integer, nullable = True)
     super_power = db.Column(db.String(150))
     date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
-    owner = db.Column(db.String, db.ForeignKey('user.token'), nullable = False)
+    user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable = False)
 
-    def __init__(self,name,description,comics_appeared_in,super_power,owner, id=''):
+    def __init__(self,name,description,comics_appeared_in,super_power,user_token, id=''):
         self.id = self.set_id()
         self.name = name
         self.description = description
         self.comics_appeared_in = comics_appeared_in
         self.super_power = super_power
-        self.owner = owner
+        self.user_token = user_token
 
     def __repr__(self):
         return f'The following Hero has been added: {self.name}'
