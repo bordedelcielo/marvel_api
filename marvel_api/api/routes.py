@@ -12,6 +12,7 @@ def getdata(current_user_token):
 # CRUD operations
 
 # Create
+# trying to use datetime
 @api.route('/heroes', methods = ['POST'])
 @token_required
 def create_hero(current_user_token):
@@ -19,12 +20,12 @@ def create_hero(current_user_token):
     description = request.json['description']
     comics_appeared_in = request.json['comics_appeared_in']
     super_power = request.json['super_power']
-    date_created = request.json['date_created']
+    # date_created = datetime.utcnow
     user_token = current_user_token.token
 
     print(f'BIG TESTER: {current_user_token.token}')
 
-    hero = Hero(name,description,comics_appeared_in,super_power,date_created, user_token)
+    hero = Hero(name,description,comics_appeared_in,super_power, user_token) #removed <date_created,> from before user_token.
 
     db.session.add(hero)
     db.session.commit()

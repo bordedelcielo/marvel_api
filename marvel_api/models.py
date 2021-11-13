@@ -52,7 +52,7 @@ class User(db.Model, UserMixin): # added UserMixin for day_3 branch
         return f'User {self.user_name} has been added to the database!'
 
 class Hero(db.Model):
-    id = db.Column(db.Integer, primary_key = True) # change Integer to String if you run into problems.
+    id = db.Column(db.String, primary_key = True) # change Integer to String if you run into problems.
     # the Hero id is supposed to be an integer according to the prompt... 
     # Switch out for string if it gives errors.
     # I'm not sure it will work with the def set_id we were shown in class.
