@@ -4,7 +4,6 @@ import secrets
 from flask import request, jsonify, json
 from marvel_api.models import Hero, User
 
-# token required code here
 def token_required(our_flask_function):
     @wraps(our_flask_function)
     def decorated(*args, **kwargs):
