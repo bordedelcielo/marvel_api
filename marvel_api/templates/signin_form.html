@@ -1,0 +1,17 @@
+<!-- Add fieldsets for name and additional fields -->
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        <fieldset id="user_name-field">
+            {{ form.user_name.label }}
+            {{ form.user_name(class = "form-control", placeholder = "Enter your username here!")}}
+        </fieldset>
+        <fieldset id="pass-field">
+            {{ form.password.label }}
+            {{ form.password(class = "form-control", placeholder = "Enter your password here!")}}
+        </fieldset>
+
+        {{ form.submit_button(class = "btn btn-primary btn-block")}}
+    </div>
+</form>
