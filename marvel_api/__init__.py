@@ -23,7 +23,7 @@ root_db.init_app(app)
 migrate = Migrate(app, root_db)
 
 login_manager.init_app(app)
-login_manager.login_view = 'signin' # specify what page to load for non-authed users
+login_manager.login_view = 'auth.signin' # specify what page to load for non-authed users
 
 ma.init_app(app)
 

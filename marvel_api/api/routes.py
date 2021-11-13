@@ -44,7 +44,7 @@ def get_heroes(current_user_token):
 # Retrive one hero endpoint
 @api.route('/heroes/<id>', methods = ['GET'])
 @token_required
-def get_drone(current_user_token, id):
+def get_hero(current_user_token, id):
     owner = current_user_token.token
     if owner == current_user_token.token:
         hero = Hero.query.get(id)

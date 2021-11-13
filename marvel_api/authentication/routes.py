@@ -45,10 +45,16 @@ def signin():
             if logged_user and check_password_hash(logged_user.password, password):
                 login_user(logged_user)
                 flash('You were successfully logged in: Via username/password', 'auth-success')
-                return redirect(url_for('site.home'))
+                return redirect(url_for('site.profile'))
             else:
                 flash('Your username/password is incorrect', 'auth-failed')
                 return redirect(url_for('auth.signin'))
     except:
         raise Exception('Invalid form data: please check your form')
     return render_template('signin.html', form=form)
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('site.home'))
