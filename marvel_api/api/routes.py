@@ -66,7 +66,6 @@ def update_hero(current_user_token,id):
     hero.description = request.json['description']
     hero.comics_appeared_in = request.json['comics_appeared_in']
     hero.super_power = request.json['super_power']
-    hero.date_created = request.json['date_created']
     hero.user_token = current_user_token.token
 
     db.session.commit()
