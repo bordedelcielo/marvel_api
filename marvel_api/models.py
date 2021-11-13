@@ -28,7 +28,7 @@ class User(db.Model, UserMixin): # added UserMixin for day_3 branch
     date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     hero = db.relationship('Hero', backref = 'owner', lazy = True)
 
-    def __init__(self,email,user_name,first_name='',last_name='',id='',password='',token='',g_auth_verify=False):
+    def __init__(self,first_name,last_name,email,user_name,id='',password='',token='',g_auth_verify=False): # the order here mattered for the signup page.
         self.id = self.set_id()
         self.first_name = first_name
         self.last_name = last_name
